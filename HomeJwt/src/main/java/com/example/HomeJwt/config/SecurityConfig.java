@@ -63,6 +63,8 @@ public class SecurityConfig {
 		        .accessDeniedHandler(customAccessDeniedHandler)
 		      
 		        .and()
+		        //1.JwtAuthenticationFilter를 SpringSecurity의 UsernamePasswordAuthenticationFilter 이전에 등록하는 설정
+		        //2.Filter를 등록하고 jwt Token을 생성하고 인증 및 권한 부여등의 기능을 제공할 provider를 만듬
 		        .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
 		        return http.build();
 		}

@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilterBean {
-
+    //jwt가 유요한 토큰인지 인증하기 위한 필터
 	private final JwtProvider jwtProvider;
 	
 	//request로 들어오는 JWT의 유효성검증 -JwtProvider.validationToken()을 필터로서 filterChain에 추가

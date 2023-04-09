@@ -33,7 +33,11 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class JwtProvider {
-    
+    /*
+     * JwtToken을 생성,인증,권한부여,유효성검사,pk 추출등의 다양한 기능을 제공하는 클래스
+     */
+	
+	
 	private String secretKey = "webfirewood";
 	private String ROLES = "roles";
 	//private final Long accessTokenValid = 3600000L;
@@ -59,7 +63,7 @@ public class JwtProvider {
 				  .setClaims(claims)
 				  .setIssuedAt(now)
 				  .setExpiration(new Date(now.getTime() + accessTokenValid))
-				  .signWith(SignatureAlgorithm.HS256, secretKey)
+				  .signWith(SignatureAlgorithm.HS256, secretKey) //암호화 알고리즘 ,secret값
 				  .compact();
 		  
 		  //refreshToken 생성
@@ -78,14 +82,14 @@ public class JwtProvider {
 				  .username(users.get().getName())
 	               .build();
 	  }
-	//Jwt로 인증정보 조회
+	//Jwt로 인증정보 조회 ->인증 성공시 SecurityContextHolder에 저장할 Authentication객체 생성
 	  public Authentication getAuthentication(String token) {
 		  Claims claims = parseClaims(token);
 		  
 		  UserDetails userDetails = userDetailService.loadUserByUsername(claims.getSubject());
 		  return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
 	  }
-	  //jwt 토큰 복호화해서 가져오기
+	  //jwt 토큰 복호화해서 가져오기  
 	  private Claims parseClaims(String token) {
 		  try {
 			  return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody();

@@ -17,7 +17,8 @@ import java.util.Collections;
 @RequiredArgsConstructor
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
-
+   
+	//JwtTokenProvider가 제공한 사용자 정보로 DB에서 알맞은 사용자 정보를 가져와 UserDetails생성
     private final UserRepository UserRepository;
 
     @Override

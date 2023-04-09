@@ -30,7 +30,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Users implements UserDetails {
-     
+     //implements UserDetails =>UserDetails를 상속받는 도메인객체 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long userId;
